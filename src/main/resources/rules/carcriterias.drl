@@ -1,0 +1,39 @@
+package kieRule;
+
+import com.jcircle.switchimpl.request.CarRequest;
+import com.jcircle.switchimpl.response.CarResponse;
+import com.jcircle.switchimpl.model.CarCriteria;
+
+global com.jcircle.switchimpl.response.CarResponse carResponse;
+global com.jcircle.switchimpl.model.CarCriteria carCriteria;
+
+rule "Economy Category Type"
+when
+    $carRequest : CarRequest(categoryType == 'Economy')
+then
+ carCriteria.setMilegePerLtr("60");
+ carCriteria.setEngineCapacity("500");
+ carCriteria.setIsEcoFriendly("Y");
+ carResponse.setCarCriteria(carCriteria);
+end;
+
+rule "SuperEconomy  Type"
+when
+    $carRequest : CarRequest(categoryType == 'SuperEconomy')
+then
+ carCriteria.setMilegePerLtr("80");
+ carCriteria.setEngineCapacity("1000");
+ carCriteria.setIsEcoFriendly("Y");
+ carResponse.setCarCriteria(carCriteria);
+end;
+
+rule "Premium Type"
+when
+    $carRequest : CarRequest(categoryType == 'Premium')
+then
+ carCriteria.setMilegePerLtr("20");
+ carCriteria.setEngineCapacity("7000");
+ carCriteria.setIsEcoFriendly("N");
+ carResponse.setCarCriteria(carCriteria);
+end;
+
